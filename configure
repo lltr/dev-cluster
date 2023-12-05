@@ -52,11 +52,11 @@ main() {
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/flux/vars/cluster-secrets.sops.yaml"
 
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/cert-manager-secret.sops.yaml" \
-            > "${PROJECT_DIR}/kubernetes/core/cert-manager/cert-manager/issuers/secret.sops.yaml"
+            > "${PROJECT_DIR}/kubernetes/apps/cert-manager/cert-manager/issuers/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/core/cert-manager/cert-manager/issuers/secret.sops.yaml"
 
         envsubst < "${PROJECT_DIR}/tmpl/kubernetes/external-dns-secret.sops.yaml" \
-            > "${PROJECT_DIR}/kubernetes/core/networking/external-dns/app/secret.sops.yaml"
+            > "${PROJECT_DIR}/kubernetes/apps/networking/external-dns/app/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/core/networking/external-dns/app/secret.sops.yaml"
 
         envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
