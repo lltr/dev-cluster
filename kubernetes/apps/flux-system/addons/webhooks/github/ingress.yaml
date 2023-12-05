@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
-    external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+    external-dns.alpha.kubernetes.io/target: "cftunnel.${SECRET_DOMAIN}"
     external-dns.home.arpa/enabled: "true"
     hajimari.io/enable: "false"
 spec:
