@@ -13,6 +13,8 @@ ingress:
   # internet --> cloudflared tunnel --> local DNS --> ingress --> service
   - hostname: "${SECRET_DOMAIN}"
     service: http://ingress-nginx-controller.networking
+  - hostname: "*.${SECRET_DOMAIN}"
+    service: http://ingress-nginx-controller.networking
 
   ### Proxy traffic to the Kubernetes Services directly
   # - hostname: "echo.${SECRET_EXT_DOMAIN}"
