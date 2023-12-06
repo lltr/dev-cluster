@@ -69,6 +69,8 @@ spec:
     #   - --enable-skip-login
     #   - --enable-insecure-login
     #   - --system-banner="Welcome to Kubernetes"
+    extraArgs:
+      - --token-ttl=43200
 
     ## Additional container environment variables
     ##
