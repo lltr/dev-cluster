@@ -26,9 +26,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: redis
-      namespace: databases
   values:
     image:
       repository: ghcr.io/goauthentik/server
