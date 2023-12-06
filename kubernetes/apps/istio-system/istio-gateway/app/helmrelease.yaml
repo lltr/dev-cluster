@@ -9,7 +9,7 @@ spec:
   interval: 12h
   maxHistory: 3
   dependsOn:
-    - name: istio-istiod
+    - name: istiod
       namespace: istio-system
   chart:
     spec:
