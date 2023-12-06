@@ -6,4 +6,4 @@ resources:
   # Flux-Kustomizations
   - ./base/ks.yaml
   - ./istiod/ks.yaml
-  - ./istio-ingress/ks.yaml
+  - ./istio-gateway/ks.yaml
