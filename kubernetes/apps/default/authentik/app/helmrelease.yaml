@@ -41,11 +41,11 @@ spec:
       error_reporting:
         enabled: false
       disable_startup_analytics: true
-      # postgresql:
+      postgresql:
         # host:
         # port: 5432
-        # name:
-        # user:
+        name: authentik
+        user: authentik
         # password:
       redis:
         host: "authentik-redis.default.svc.cluster.local"
@@ -94,3 +94,11 @@ spec:
       name: *secret
       valuesKey: AUTHENTIK_REDIS_PASS
       targetPath: authentik.redis.password
+    - kind: Secret
+      name: *secret
+      valuesKey: AUTHENTIK_DB_PASS
+      targetPath: authentik.postgresql.password
+    - kind: Secret
+      name: *secret
+      valuesKey: AUTHENTIK_DB_PASS
+      targetPath: postgresql.postgresqlPassword
