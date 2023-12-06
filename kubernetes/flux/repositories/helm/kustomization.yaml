@@ -12,4 +12,4 @@ resources:
   - ./stakater.yaml
   - ./weave-gitops.yaml
   - ./kubernetes-dashboard.yaml
-  - ./rook-release.yaml
+  - ./istio.yaml
