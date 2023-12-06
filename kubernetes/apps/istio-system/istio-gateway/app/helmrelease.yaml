@@ -1,40 +1,46 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.mcf.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app istio-gateway
-  namespace: istio-system
+  name: istio-ingressgateway
 spec:
-  interval: 15m
+  interval: 12h
+  maxHistory: 3
+  dependsOn:
+    - name: istio-istiod
+      namespace: istio-system
   chart:
     spec:
       chart: gateway
       version: 1.20.0
       sourceRef:
         kind: HelmRepository
-        name: istio
-        namespace: flux-system
-  maxHistory: 2
+        name: istio-charts
+        namespace: istio-system
   install:
-    remediation:
-      retries: 5
+    createNamespace: true
+    crds: Create
+    replace: true
   upgrade:
-    remediation:
-      retries: 5
+    cleanupOnFail: true
+    crds: CreateReplace
+  uninstall:
+    keepHistory: false
   values:
-    replicaCount: 1
-    service:
-      type: LoadBalancer
-      annotations: {}
-      loadBalancerIP: ""
-      loadBalancerSourceRanges: []
-      externalTrafficPolicy: ""
-      externalIPs: []
-      ipFamilyPolicy: ""
-      ipFamilies: []
+    resources:
+      requests:
+        cpu: 200m
     autoscaling:
-      enabled: true
-      minReplicas: 1
-      maxReplicas: 3
-      targetCPUUtilizationPercentage: 80
+      minReplicas: 2
+    service:
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: |-
+            192.168.51.202
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            istio: ingressgateway
