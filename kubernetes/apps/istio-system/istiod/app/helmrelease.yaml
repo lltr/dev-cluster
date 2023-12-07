@@ -77,6 +77,25 @@ spec:
     # See https://istio.io/docs/reference/config/istio.mesh.v1alpha1/ for all available options
     meshConfig:
       enablePrometheusMerge: true
+      # accessLogFile: /dev/stdout
+      trustDomain: cluster.local
+      extensionProviders:
+        - envoyExtAuthzHttp:
+            headersToDownstreamOnAllow:
+              - cookie
+            headersToUpstreamOnAllow:
+              - set-cookie
+              - x-authentik-*
+            includeRequestHeadersInCheck:
+              - cookie
+            includeHeadersInCheck:
+              - authorization
+              - cookie
+            pathPrefix: /outpost.goauthentik.io/auth/envoy
+            port: 80
+            service: authentik.default.svc.cluster.local
+          name: authentik
+
     global:
       # Used to locate istiod.
       istioNamespace: istio-system
