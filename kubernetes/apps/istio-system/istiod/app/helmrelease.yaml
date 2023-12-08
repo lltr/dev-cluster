@@ -86,6 +86,8 @@ spec:
             headersToUpstreamOnAllow:
               - set-cookie
               - x-authentik-*
+              - app_username
+              - app_password
             includeRequestHeadersInCheck:
               - cookie
             includeHeadersInCheck:
