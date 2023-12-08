@@ -3,7 +3,7 @@ apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: httpbin-ingress-istio
-  namespace: istio-ingress
+  namespace: istio-system
 spec:
   action: ALLOW
   rules:
@@ -21,7 +21,7 @@ apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: httpbin-ingress-custom
-  namespace: httpbin
+  namespace: appsplatform
 spec:
   action: CUSTOM
   provider:

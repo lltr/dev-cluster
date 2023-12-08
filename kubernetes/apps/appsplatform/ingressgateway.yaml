@@ -3,7 +3,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: httpbin-ingress
-  namespace: istio-ingress
+  namespace: appsplatform
 spec:
   selector:
     istio: ingressgateway
@@ -19,7 +19,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: httpbin-ingress
-  namespace: istio-ingress
+  namespace: appsplatform
 spec:
   gateways:
     - httpbin-ingress
