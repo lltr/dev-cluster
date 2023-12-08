@@ -1,0 +1,46 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: echo-server-ingress
+  namespace: appsplatform
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - echo-server2.selad.net
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: echo-server-ingress
+  namespace: appsplatform
+spec:
+  gateways:
+    - echo-server-ingress
+  hosts:
+    - echo-server2.selad.net
+  http:
+    - match:
+        - uri:
+            prefix: /outpost.goauthentik.io
+      route:
+        - destination:
+            host: authentik.default.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            regex: ^\/[^\.]+.*
+        - uri:
+            exact: /
+      route:
+        - destination:
+            host: echo-server.appsplatform.svc.cluster.local
+            port:
+              number: 8080

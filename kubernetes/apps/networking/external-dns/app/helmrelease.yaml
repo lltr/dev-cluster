@@ -36,11 +36,11 @@ spec:
           secretKeyRef:
             name: external-dns-secret
             key: api-key
-    extraArgs:
+    # extraArgs:
       # - --cloudflare-proxied
-      - --annotation-filter=external-dns.home.arpa/enabled in (true)
+      # - --annotation-filter=external-dns.home.arpa/enabled in (true)
     policy: sync
-    sources: ["ingress"]
+    sources: ["ingress", "istio-gateway", "istio-virtualservice"]
     txtPrefix: k8s.
     txtOwnerId: default
     domainFilters:
