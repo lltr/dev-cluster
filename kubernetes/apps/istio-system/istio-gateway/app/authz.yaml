@@ -2,6 +2,40 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
+  name: httpbin-ingress-istio
+  namespace: istio-ingress
+spec:
+  action: ALLOW
+  rules:
+    - to:
+        - operation:
+            hosts:
+              - httpbin.selad.net
+              - httpbin.selad.net:443
+              - httpbin.selad.net:80
+  selector:
+    matchLabels:
+      app: istio-ingressgateway
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: httpbin-ingress-custom
+  namespace: httpbin
+spec:
+  action: CUSTOM
+  provider:
+    name: authentik
+  rules:
+    - to:
+        - operation:
+            hosts:
+              - httpbin.selad.net
+              - httpbin.selad.net:*
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
   name: authentik-policy
   namespace: istio-system
 spec:

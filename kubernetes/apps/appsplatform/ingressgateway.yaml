@@ -1,0 +1,46 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: httpbin-ingress
+  namespace: istio-ingress
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - httpbin.selad.net
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpbin-ingress
+  namespace: istio-ingress
+spec:
+  gateways:
+    - httpbin-ingress
+  hosts:
+    - httpbin.selad.net
+  http:
+    - match:
+        - uri:
+            prefix: /outpost.goauthentik.io
+      route:
+        - destination:
+            host: authentik.default.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - uri:
+            regex: ^\/[^\.]+.*
+        - uri:
+            exact: /
+      route:
+        - destination:
+            host: httpbin.appsplatform.svc.cluster.local
+            port:
+              number: 8000
