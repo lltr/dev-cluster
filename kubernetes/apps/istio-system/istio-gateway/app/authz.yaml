@@ -36,6 +36,24 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
+  name: bookinfo-gateway-istio
+  namespace: appsplatform
+spec:
+  action: ALLOW
+  rules:
+    - to:
+        - operation:
+            hosts:
+              - bookinfo.selad.net
+              - bookinfo.selad.net:443
+              - bookinfo.selad.net:80
+  selector:
+    matchLabels:
+      app: istio-ingressgateway
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
   name: bookinfo-gateway-custom
   namespace: appsplatform
 spec:
