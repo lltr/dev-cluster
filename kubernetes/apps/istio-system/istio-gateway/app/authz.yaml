@@ -15,4 +15,4 @@ spec:
     - to:
         - operation:
             hosts:
-              - "*.selad.net"
+              - "app.selad.net"
