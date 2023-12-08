@@ -95,15 +95,15 @@ spec:
             port: 80
             service: authentik.default.svc.cluster.local
           name: authentik
-        - name: "sample-ext-authz-grpc"
-          envoyExtAuthzGrpc:
-            service: "ext-authz.appsplatform.svc.cluster.local"
-            port: "9000"
-        - name: "sample-ext-authz-http"
-          envoyExtAuthzHttp:
-            service: "ext-authz.appsplatform.svc.cluster.local"
-            port: "8000"
-            includeRequestHeadersInCheck: ["x-ext-authz"]
+        # - name: "sample-ext-authz-grpc"
+        #   envoyExtAuthzGrpc:
+        #     service: "ext-authz.appsplatform.svc.cluster.local"
+        #     port: "9000"
+        # - name: "sample-ext-authz-http"
+        #   envoyExtAuthzHttp:
+        #     service: "ext-authz.appsplatform.svc.cluster.local"
+        #     port: "8000"
+        #     includeRequestHeadersInCheck: ["x-ext-authz"]
 
     global:
       # Used to locate istiod.

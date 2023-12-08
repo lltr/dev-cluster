@@ -36,6 +36,22 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
+  name: bookinfo-gateway-custom
+  namespace: appsplatform
+spec:
+  action: CUSTOM
+  provider:
+    name: authentik
+  rules:
+    - to:
+        - operation:
+            hosts:
+              - bookinfo.selad.net
+              - bookinfo.selad.net:*
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
   name: authentik-policy
   namespace: istio-system
 spec:
