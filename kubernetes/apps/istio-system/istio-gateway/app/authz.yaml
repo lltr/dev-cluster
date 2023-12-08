@@ -70,6 +70,24 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
+  name: echo-server-gateway-istio
+  namespace: istio-system
+spec:
+  action: ALLOW
+  rules:
+    - to:
+        - operation:
+            hosts:
+              - echo-server2.selad.net
+              - echo-server2.selad.net:443
+              - echo-server2.selad.net:80
+  selector:
+    matchLabels:
+      app: istio-ingressgateway
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
   name: authentik-policy
   namespace: istio-system
 spec:
