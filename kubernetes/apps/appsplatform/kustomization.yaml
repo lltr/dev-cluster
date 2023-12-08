@@ -5,3 +5,4 @@ resources:
   - ./namespace.yaml
   - ./ingressgateway.yaml
   - ./bookinfo-ingress.yaml
+  - ./echo-server/ks.yaml
